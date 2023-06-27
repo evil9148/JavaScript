@@ -3,12 +3,14 @@ startTime = 10 * 60
 time = startTime
 intervalId = null
 timeOutId = null
+startNum = 1
+finishNum = 50
 
 fnInit = ()=>{
   fnInitVar()
   fnPrintNextNum()
   fnSetTimer()
-  fnSetArr(1,25)
+  fnSetArr(startNum,finishNum/2)
   fnSpawnBtn()
   fnBtnHandler()
 }
@@ -35,8 +37,5 @@ fnCheckGameOver = ()=>{
   if(time <= 0){
     clearInterval(intervalId)
     document.querySelector(`.game-over`).style.display='flex'
-    document.querySelectorAll(`.board button`).forEach(btn=>{
-      btn.remove()
-    })
   }
 }

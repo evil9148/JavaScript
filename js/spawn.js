@@ -11,7 +11,8 @@ fnSetArr = (start, end) => {
 }
 
 fnSpawnBtn = () => {
-  for (let i = 1; i <= 25; i++) {
+  document.querySelector(`.board`).innerHTML = ''
+  for (let i = startNum; i <= finishNum / 2; i++) {
     let ranN = Math.floor(Math.random() * btnArr.length)
     document.querySelector(`.board`).append(btnArr[ranN])
     btnArr.splice(ranN, 1)
@@ -22,11 +23,30 @@ fnBtnHandler = () => {
   document.querySelectorAll(`.board button`).forEach(btn => {
     btn.addEventListener(`click`, (e) => {
       if (parseInt(e.currentTarget.value) === nextNum) {
-        e.currentTarget.disabled = true
+        fnPositive(e.currentTarget)
       } else {
-        time -= 10*10
-        document.querySelector(`section`).classList.add(`active`)
+        fnNagative()
       }
     })
   })
+}
+
+fnPositive = (el) => {
+  el.disabled = true
+  nextNum++
+  document.querySelector(`.next-num`).innerHTML = nextNum
+  if (nextNum === finishNum / 2 + 1) {
+    fnSetArr(finishNum / 2 + 1, finishNum)
+    fnSpawnBtn()
+    fnBtnHandler()
+  }
+  if (nextNum === finishNum + 1) {
+    clearInterval(intervalId)
+    document.querySelector(`.game-completed`).style.display = 'flex'
+  }
+}
+
+fnNagative = () => {
+  time -= 10 * 10
+  document.querySelector(`section`).classList.add(`active`)
 }

@@ -118,7 +118,7 @@ main{
   }
 }
 
-.game-over{
+.game-over, .game-completed{
   position: absolute;
   display: none;
   flex-direction: column;
